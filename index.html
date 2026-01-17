@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyCast - Monochrome Weather</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body class="p-4 md:p-6">
+
+    <div class="w-full max-w-6xl h-full flex flex-col">
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 w-full">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
+                    <i class="fas fa-wind text-black text-xl"></i>
+                </div>
+                <h1 class="text-xl font-black tracking-widest">SKYCAST</h1>
+            </div>
+
+            <!-- Search Area -->
+            <div class="search-container flex items-center p-1 w-full max-w-md focus-within:border-white/40">
+                <i class="fas fa-search ml-4 text-white/30"></i>
+                <input type="text" id="cityInput" placeholder="Enter city name..." autocomplete="off"
+                    class="bg-transparent border-none focus:ring-0 w-full p-2.5 outline-none text-white search-input">
+                <button id="searchBtn" class="bw-button px-5 py-2 rounded-lg font-bold text-sm">
+                    Search
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Interface -->
+        <div id="contentWrapper" class="flex-grow relative overflow-hidden">
+            
+            <!-- Welcome View -->
+            <div id="infoBox" class="glass-card h-full w-full flex flex-col items-center justify-center text-center p-10">
+                <i class="fas fa-adjust text-6xl mb-6 text-white/10"></i>
+                <h2 class="text-2xl font-bold mb-2 uppercase tracking-widest">Minimalist Weather</h2>
+                <p class="text-white/40 max-w-xs">Enter a city to see the world in black and white.</p>
+            </div>
+
+            <!-- Dashboard -->
+            <main id="weatherDisplay" class="hidden h-full grid grid-cols-1 lg:grid-cols-12 gap-5 overflow-y-auto lg:overflow-hidden pb-4">
+                
+                <!-- Main Weather (Left) -->
+                <section class="lg:col-span-8 glass-card p-8 flex flex-col justify-between relative">
+                    <div>
+                        <div class="flex items-center gap-2 text-white/40 mb-1">
+                            <i class="fas fa-location-dot text-xs"></i>
+                            <span id="cityName" class="font-bold uppercase tracking-widest text-xs">--</span>
+                        </div>
+                        <h2 id="currentDate" class="text-3xl font-bold mb-8">--</h2>
+                        
+                        <div class="flex items-start">
+                            <span id="temp" class="text-[100px] font-black leading-none">--</span>
+                            <span class="text-3xl mt-4">°C</span>
+                        </div>
+                        <p id="weatherDesc" class="text-xl font-light uppercase tracking-[0.2em] text-white/60">--</p>
+                    </div>
+
+                    <div class="absolute right-12 top-12">
+                        <div id="weatherIconLarge" class="text-9xl float-icon text-white">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                    </div>
+
+                    <!-- Metrics -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-8 border-t border-white/10">
+                        <div>
+                            <p class="text-[9px] uppercase tracking-widest text-white/30 mb-1">Humidity</p>
+                            <p id="humidity" class="text-lg font-bold">--%</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] uppercase tracking-widest text-white/30 mb-1">Wind</p>
+                            <p id="windSpeed" class="text-lg font-bold">-- km/h</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] uppercase tracking-widest text-white/30 mb-1">Feels Like</p>
+                            <p id="feelsLike" class="text-lg font-bold">--°</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] uppercase tracking-widest text-white/30 mb-1">Pressure</p>
+                            <p id="pressure" class="text-lg font-bold">-- hPa</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AQI (Right) -->
+                <section class="lg:col-span-4 glass-card p-8 flex flex-col items-center">
+                    <h3 class="text-sm font-bold mb-10 uppercase tracking-widest self-start text-white/50">Air Quality</h3>
+                    
+                    <div class="flex flex-col items-center flex-grow justify-center">
+                        <div id="aqiBadge" class="mb-4 border border-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
+                            --
+                        </div>
+                        <div id="aqiValue" class="text-7xl font-black mb-2">--</div>
+                        <p id="aqiStatus" class="text-center text-[11px] text-white/40 leading-relaxed max-w-[180px]">---</p>
+                    </div>
+
+                    <div class="w-full space-y-3 mt-8">
+                        <div class="flex justify-between p-3 rounded-xl bg-white/5 border border-white/5">
+                            <span class="text-[10px] uppercase text-white/30">PM 2.5</span>
+                            <span id="pm25" class="text-sm font-bold">--</span>
+                        </div>
+                        <div class="flex justify-between p-3 rounded-xl bg-white/5 border border-white/5">
+                            <span class="text-[10px] uppercase text-white/30">PM 10</span>
+                            <span id="pm10" class="text-sm font-bold">--</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Forecast (Bottom) -->
+                <section class="lg:col-span-12 glass-card p-6">
+                    <div id="forecastContainer" class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        <!-- Injected by JS -->
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>

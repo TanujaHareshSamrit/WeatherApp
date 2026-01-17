@@ -1,0 +1,64 @@
+ @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            background: #000000;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2rem;
+        }
+
+        .search-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        /* FIX: Removing extra colors from browser autofill and focus */
+        .search-input {
+            background-color: transparent !important;
+            box-shadow: none !important;
+            outline: none !important;
+        }
+
+        /* This hides the blue/purple background that browsers often add */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: white !important;
+            -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .float-icon {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .bw-button {
+            background: #ffffff;
+            color: #000000;
+            transition: all 0.3s ease;
+        }
+        .bw-button:hover {
+            background: #cccccc;
+        }
